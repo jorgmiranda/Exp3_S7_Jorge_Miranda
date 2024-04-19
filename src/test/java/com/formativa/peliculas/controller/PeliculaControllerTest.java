@@ -50,9 +50,9 @@ public class PeliculaControllerTest {
         // ACT & Assert
         mockMvc.perform(MockMvcRequestBuilders.get("/peliculas"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$", Matchers.hasSize(2)))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[0].titulo", Matchers.is("El Viaje Misterioso")))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[1].titulo", Matchers.is("El Amor Eterno")));
+                .andExpect(MockMvcResultMatchers.jsonPath("$", Matchers.aMapWithSize(2)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$._embedded.peliculaList[0].titulo", Matchers.is("El Viaje Misterioso")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$._embedded.peliculaList[1].titulo", Matchers.is("El Amor Eterno")));
     }
     
 }

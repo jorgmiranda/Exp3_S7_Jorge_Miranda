@@ -65,13 +65,21 @@ public class PeliculaController {
     ///Nuevos controladores CRUD
 
     @PostMapping
-    public Pelicula crearPelicula(@RequestBody Pelicula pelicula) {
-        return peliculaService.crearPelicula(pelicula);
+    public  EntityModel<Pelicula> crearPelicula(@RequestBody Pelicula pelicula) {
+        Pelicula peliculaCreada = peliculaService.crearPelicula(pelicula);
+            return EntityModel.of(peliculaCreada,
+                WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(this.getClass()).getPeliculaByID(peliculaCreada.getId())).withSelfRel(),
+                WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(this.getClass()).getAllPeliculas()).withRel("all-students"));
+
     }
 
     @PutMapping("/{id}")
-    public Pelicula actualizarPelicula(@PathVariable Long id, @RequestBody Pelicula pelicula) {
-        return peliculaService.actualizarPelicula(id, pelicula);
+    public EntityModel<Pelicula> actualizarPelicula(@PathVariable Long id, @RequestBody Pelicula pelicula) {
+        Pelicula peliculaActualizada = peliculaService.actualizarPelicula(id, pelicula);
+        return EntityModel.of(peliculaActualizada,
+                WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(this.getClass()).getPeliculaByID(id)).withSelfRel(),
+                WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(this.getClass()).getAllPeliculas()).withRel("all-students"));
+
         
     }
 
