@@ -52,7 +52,13 @@ public class PeliculaControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$", Matchers.aMapWithSize(2)))
                 .andExpect(MockMvcResultMatchers.jsonPath("$._embedded.peliculaList[0].titulo", Matchers.is("El Viaje Misterioso")))
-                .andExpect(MockMvcResultMatchers.jsonPath("$._embedded.peliculaList[1].titulo", Matchers.is("El Amor Eterno")));
+                .andExpect(MockMvcResultMatchers.jsonPath("$._embedded.peliculaList[1].titulo", Matchers.is("El Amor Eterno")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$._embedded.peliculaList[0].year", Matchers.is(2021)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$._embedded.peliculaList[1].year", Matchers.is(2019)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$._embedded.peliculaList[0].director", Matchers.is("Juan García")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$._embedded.peliculaList[1].director", Matchers.is("María Fernández")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$._embedded.peliculaList[0].genero", Matchers.is("aventura")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$._embedded.peliculaList[1].genero", Matchers.is("romance")));
     }
     
 }
